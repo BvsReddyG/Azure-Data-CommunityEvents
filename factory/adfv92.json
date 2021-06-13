@@ -1,0 +1,9 @@
+{
+	"name": "adfv92",
+	"location": "canadacentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "77e27728-10e0-4b9c-89f1-385c8bff7d0d",
+		"tenantId": "4812173e-b6a8-4825-936f-31096b569514"
+	}
+}

@@ -1,0 +1,271 @@
+{
+	"name": "CopyPipeline_cu2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_cu2",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "Purchasing.PurchaseOrders"
+					},
+					{
+						"name": "Destination",
+						"value": "bacpac-database//"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"validateDataConsistency": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "PurchaseOrderID",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "PurchaseOrderID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SupplierID",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "SupplierID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "OrderDate",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "OrderDate",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DeliveryMethodID",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "DeliveryMethodID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ContactPersonID",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ContactPersonID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ExpectedDeliveryDate",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "ExpectedDeliveryDate",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SupplierReference",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SupplierReference",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IsOrderFinalized",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "IsOrderFinalized",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Comments",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Comments",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "InternalComments",
+									"type": "String"
+								},
+								"sink": {
+									"name": "InternalComments",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LastEditedBy",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "LastEditedBy",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LastEditedWhen",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "LastEditedWhen",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_cu2",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_cu2",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy_cu2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[Integration].[GetStockHoldingUpdates]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Copy_cu2",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "bvsreddy.bw@gmail.com",
+					"method": "GET"
+				}
+			},
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "SourceDataset_cu2",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-06-12T09:51:30Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
