@@ -39,8 +39,7 @@
 							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": false,
-					"validateDataConsistency": false
+					"enableStaging": false
 				},
 				"inputs": [
 					{
@@ -76,10 +75,6 @@
 				"userProperties": [],
 				"typeProperties": {
 					"storedProcedureName": "[Integration].[GetStockHoldingUpdates]"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{

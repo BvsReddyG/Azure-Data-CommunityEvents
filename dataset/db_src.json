@@ -1,10 +1,6 @@
 {
 	"name": "db_src",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [],

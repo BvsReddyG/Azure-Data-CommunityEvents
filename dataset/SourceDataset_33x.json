@@ -1,10 +1,6 @@
 {
 	"name": "SourceDataset_33x",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase2",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [

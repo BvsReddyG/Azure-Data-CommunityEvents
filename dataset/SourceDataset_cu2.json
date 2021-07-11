@@ -1,10 +1,6 @@
 {
 	"name": "SourceDataset_cu2",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase1",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [

@@ -1,10 +1,6 @@
 {
 	"name": "db_trg",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase",
-			"type": "LinkedServiceReference"
-		},
 		"parameters": {
 			"table_name": {
 				"type": "string"

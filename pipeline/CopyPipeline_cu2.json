@@ -47,7 +47,6 @@
 						}
 					},
 					"enableStaging": false,
-					"validateDataConsistency": false,
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
@@ -208,10 +207,6 @@
 				"userProperties": [],
 				"typeProperties": {
 					"storedProcedureName": "[Integration].[GetStockHoldingUpdates]"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
