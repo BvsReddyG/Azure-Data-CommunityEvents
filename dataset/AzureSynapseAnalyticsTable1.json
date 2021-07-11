@@ -1,8 +1,0 @@
-{
-	"name": "AzureSynapseAnalyticsTable1",
-	"properties": {
-		"annotations": [],
-		"type": "AzureSqlDWTable",
-		"schema": []
-	}
-}
