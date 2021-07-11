@@ -9,8 +9,8 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "dbo",
-			"table": "myTable12"
+			"schema": "Purchasing",
+			"table": "PurchaseOrders"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
