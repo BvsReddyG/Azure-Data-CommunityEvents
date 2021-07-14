@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "CopyPipeline_cu2",
+					"referenceName": "CopyPipeline_0rp",
 					"type": "PipelineReference"
 				}
 			}
@@ -14,9 +14,9 @@
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Minute",
-				"interval": 15,
-				"startTime": "2021-06-13T05:58:00Z",
+				"frequency": "Day",
+				"interval": 16,
+				"startTime": "2021-07-14T14:56:00Z",
 				"timeZone": "UTC"
 			}
 		}
