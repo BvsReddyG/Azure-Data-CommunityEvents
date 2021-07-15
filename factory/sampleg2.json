@@ -1,0 +1,9 @@
+{
+	"name": "sampleg2",
+	"location": "canadacentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "29bb2d2b-54a5-4e43-8495-cd987f4edf57",
+		"tenantId": "4812173e-b6a8-4825-936f-31096b569514"
+	}
+}
