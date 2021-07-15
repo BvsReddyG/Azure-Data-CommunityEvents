@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_jk1",
+				"name": "Http to AdlsG2",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
