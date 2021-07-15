@@ -60,6 +60,136 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "onprim to blob",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
+			},
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Http to AdlsG2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "onprim to blob",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Notebook1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Data flow1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Notebook1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					},
+					{
+						"activity": "Data flow1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "Http to AdlsG2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "onprim to blob",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
 			}
 		],
 		"annotations": []
