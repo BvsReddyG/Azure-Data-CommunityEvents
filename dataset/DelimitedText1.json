@@ -1,0 +1,44 @@
+{
+	"name": "DelimitedText1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "bank.csv",
+				"container": "data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Age",
+				"type": "String"
+			},
+			{
+				"name": "Experience",
+				"type": "String"
+			},
+			{
+				"name": "Income",
+				"type": "String"
+			},
+			{
+				"name": "Home",
+				"type": "String"
+			},
+			{
+				"name": "PersonalLoan",
+				"type": "String"
+			}
+		]
+	}
+}
