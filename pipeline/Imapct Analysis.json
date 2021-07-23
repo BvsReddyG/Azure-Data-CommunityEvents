@@ -1,11 +1,51 @@
 {
-	"name": "pipeline1",
+	"name": "Imapct Analysis",
 	"properties": {
 		"activities": [
 			{
-				"name": "P vs P",
-				"type": "DatabricksNotebook",
+				"name": "Read Processed Tweets",
+				"type": "Lookup",
 				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "Analyse sentments",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Read Processed Tweets",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "copy Tweets data",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Analyse sentments",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -15,11 +55,92 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/bvsreddy.bw@gmail.com/Pop vs. Price SQL"
+					"enableStaging": false
+				}
+			},
+			{
+				"name": "Copy Tweets scan",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Analyse sentments",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": []
+			},
+			{
+				"name": "Imapact weather",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
 				},
-				"linkedServiceName": {
-					"referenceName": "AzureDatabricks1",
-					"type": "LinkedServiceReference"
+				"userProperties": []
+			},
+			{
+				"name": "Copy weather Data",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Imapact weather",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
+			},
+			{
+				"name": "Impact Flights",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "Copy Delay data",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Impact Flights",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
 				}
 			}
 		],
