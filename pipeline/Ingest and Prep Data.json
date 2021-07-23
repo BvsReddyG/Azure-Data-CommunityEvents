@@ -1,5 +1,5 @@
 {
-	"name": "pipeline2",
+	"name": "Ingest and Prep Data",
 	"properties": {
 		"activities": [
 			{
@@ -213,6 +213,26 @@
 				"userProperties": [],
 				"typeProperties": {
 					"scriptPath": ""
+				}
+			},
+			{
+				"name": "Imapct Analysis",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "DataPrep",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Imapct Analysis",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
 				}
 			}
 		],
