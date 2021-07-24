@@ -1,0 +1,41 @@
+{
+	"name": "SourceDataset_deg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HttpServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "parts.csv.gz"
+			},
+			"columnDelimiter": ",",
+			"rowDelimiter": "\n",
+			"compressionCodec": "gzip",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "part_num",
+				"type": "String"
+			},
+			{
+				"name": "name",
+				"type": "String"
+			},
+			{
+				"name": "part_cat_id",
+				"type": "String"
+			},
+			{
+				"name": "part_material",
+				"type": "String"
+			}
+		]
+	}
+}
