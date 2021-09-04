@@ -1,5 +1,5 @@
 {
-	"name": "DelimitedText1",
+	"name": "DestinationDataset_04i",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
@@ -12,15 +12,12 @@
 				"type": "AzureBlobStorageLocation",
 				"container": "httpdata"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": "|",
 			"escapeChar": "\\",
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": [
-			{
-				"type": "String"
-			}
-		]
+		"schema": []
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }
