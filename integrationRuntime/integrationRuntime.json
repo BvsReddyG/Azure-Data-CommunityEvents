@@ -1,7 +1,0 @@
-{
-	"name": "integrationRuntime",
-	"properties": {
-		"type": "SelfHosted",
-		"description": "adsdf"
-	}
-}
