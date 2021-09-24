@@ -3,14 +3,21 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
-		"pipelines": [],
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "CopyPipeline_6ez",
+					"type": "PipelineReference"
+				}
+			}
+		],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
 				"frequency": "Minute",
 				"interval": 15,
-				"startTime": "2021-07-15T15:17:00Z",
-				"timeZone": "UTC"
+				"startTime": "2021-09-24T16:24:00",
+				"timeZone": "Dateline Standard Time"
 			}
 		}
 	}
