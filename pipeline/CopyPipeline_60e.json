@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_60e",
+				"name": "SQL to Blob Airline",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -40,7 +40,32 @@
 						}
 					},
 					"enableStaging": false,
-					"validateDataConsistency": false
+					"validateDataConsistency": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Code",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Airline_Code",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Airline_Code",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
