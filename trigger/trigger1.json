@@ -3,13 +3,21 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
-		"pipelines": [],
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "HTTP to Blob",
+					"type": "PipelineReference"
+				}
+			}
+		],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
 				"frequency": "Minute",
 				"interval": 15,
 				"startTime": "2021-09-24T16:24:00",
+				"endTime": "2021-09-27T15:30:18",
 				"timeZone": "Dateline Standard Time"
 			}
 		}
