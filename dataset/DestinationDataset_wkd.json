@@ -1,0 +1,20 @@
+{
+	"name": "DestinationDataset_wkd",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage8",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "sample",
+				"container": "badatabase-bacpc"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
