@@ -1,0 +1,22 @@
+{
+	"name": "DestinationDataset_tn5",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage10",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "badatabase-bacpc"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
