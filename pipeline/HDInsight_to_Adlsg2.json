@@ -59,29 +59,6 @@
 				"userProperties": []
 			},
 			{
-				"name": "to_AzureSQlDW",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Transformation",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"enableStaging": false
-				}
-			},
-			{
 				"name": "Notify ETL Job",
 				"type": "WebActivity",
 				"dependsOn": [
@@ -106,7 +83,7 @@
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "to_AzureSQlDW",
+						"activity": "Azure_to_onprem blob",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -120,6 +97,29 @@
 					"secureInput": false
 				},
 				"userProperties": []
+			},
+			{
+				"name": "Azure_to_onprem blob",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Transformation",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
 			},
 			{
 				"name": "Transformation",
