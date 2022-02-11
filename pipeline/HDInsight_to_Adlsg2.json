@@ -1,32 +1,9 @@
 {
-	"name": "pipeline1",
+	"name": "HDInsight_to_Adlsg2",
 	"properties": {
 		"activities": [
 			{
 				"name": "From Hdfs_to_adlsg2",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Dataset",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"enableStaging": false
-				}
-			},
-			{
-				"name": "Onprem_to_Adlsg2",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -82,34 +59,11 @@
 				"userProperties": []
 			},
 			{
-				"name": "Azure_to_onprem blob",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Transformations",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"enableStaging": false
-				}
-			},
-			{
 				"name": "to_AzureSQlDW",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Transformations",
+						"activity": "Transformation",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -132,7 +86,7 @@
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "Transformations",
+						"activity": "Transformation",
 						"dependencyConditions": [
 							"Failed"
 						]
@@ -152,7 +106,7 @@
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "Azure_to_onprem blob",
+						"activity": "to_AzureSQlDW",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -168,40 +122,14 @@
 				"userProperties": []
 			},
 			{
-				"name": "Notify ML",
-				"type": "WebActivity",
-				"dependsOn": [
-					{
-						"activity": "Retain model",
-						"dependencyConditions": [
-							"Failed"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": []
-			},
-			{
-				"name": "Transformations",
-				"type": "HDInsightHive",
+				"name": "Transformation",
+				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
 						"activity": "From Hdfs_to_adlsg2",
 						"dependencyConditions": [
 							"Succeeded"
 						]
-					},
-					{
-						"activity": "Onprem_to_Adlsg2",
-						"dependencyConditions": [
-							"Succeeded"
-						]
 					}
 				],
 				"policy": {
@@ -211,33 +139,7 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
-				"typeProperties": {
-					"scriptPath": ""
-				}
-			},
-			{
-				"name": "Retain model",
-				"type": "HDInsightHive",
-				"dependsOn": [
-					{
-						"activity": "Onprem_to_Adlsg2",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"scriptPath": ""
-				}
+				"userProperties": []
 			}
 		],
 		"annotations": []
